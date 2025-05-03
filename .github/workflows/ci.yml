@@ -28,7 +28,7 @@ jobs:
           registry: ghcr.io/patiphatrattanosot
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: ./frontend/
+          dockerfile: ./frontend/dockerfile
           context: ./frontend
           tags: ${{ env.TAG_NAME }}, latest
 
@@ -39,6 +39,6 @@ jobs:
           registry: ghcr.io/patiphatrattanosot
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: ./backend/
+          dockerfile: ./backend/dockerfile
           context: ./backend
           tags: ${{ env.TAG_NAME }}, latest
