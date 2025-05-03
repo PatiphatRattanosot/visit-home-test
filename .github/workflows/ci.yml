@@ -34,14 +34,14 @@ jobs:
           TAG_NAME: ${{ env.TAG_NAME }}
         run: |
           docker-compose build
-          docker tag ghcr.io/patiphatrattanosoth/visit-home-frontend ghcr.io/patiphatrattanosoth/visit-home-frontend:${{ env.TAG_NAME }}
-          docker tag ghcr.io/patiphatrattanosoth/visit-home-frontend ghcr.io/patiphatrattanosoth/visit-home-frontend:latest
+          docker tag ghcr.io/patiphatrattanosot/visit-home-frontend ghcr.io/patiphatrattanosot/visit-home-frontend:${{ env.TAG_NAME }}
+          docker tag ghcr.io/patiphatrattanosot/visit-home-frontend ghcr.io/patiphatrattanosot/visit-home-frontend:latest
 
-          docker tag ghcr.io/patiphatrattanosoth/visit-home-backend ghcr.io/patiphatrattanosoth/visit-home-backend:${{ env.TAG_NAME }}
-          docker tag ghcr.io/patiphatrattanosoth/visit-home-backend ghcr.io/patiphatrattanosoth/visit-home-backend:latest
+          docker tag ghcr.io/patiphatrattanosot/visit-home-backend ghcr.io/patiphatrattanosot/visit-home-backend:${{ env.TAG_NAME }}
+          docker tag ghcr.io/patiphatrattanosot/visit-home-backend ghcr.io/patiphatrattanosot/visit-home-backend:latest
       
-          docker push ghcr.io/patiphatrattanosoth/visit-home-frontend:${{ env.TAG_NAME }}
-          docker push ghcr.io/patiphatrattanosoth/visit-home-frontend:latest
+          docker push ghcr.io/patiphatrattanosot/visit-home-frontend:${{ env.TAG_NAME }}
+          docker push ghcr.io/patiphatrattanosot/visit-home-frontend:latest
       
-          docker push ghcr.io/patiphatrattanosoth/visit-home-backend:${{ env.TAG_NAME }}
-          docker push ghcr.io/patiphatrattanosoth/visit-home-backend:latest
+          docker push ghcr.io/patiphatrattanosot/visit-home-backend:${{ env.TAG_NAME }}
+          docker push ghcr.io/patiphatrattanosot/visit-home-backend:latest
