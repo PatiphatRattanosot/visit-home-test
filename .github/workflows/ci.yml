@@ -34,5 +34,5 @@ jobs:
           TAG_NAME: ${{ env.TAG_NAME }}
         run: |
           docker-compose build
-          docker tag visit-home ghcr.io/patiphatrattanosot/visit-home:${TAG_NAME}
-          docker push ghcr.io/patiphatrattanosot/visit-home:${TAG_NAME}
+          docker tag visit-home-test ghcr.io/patiphatrattanosot/visit-home-test:${TAG_NAME}
+          docker push ghcr.io/patiphatrattanosot/visit-home-test:${TAG_NAME}
