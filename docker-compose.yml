@@ -3,7 +3,7 @@ version: '3.8'
 services:
   backend:
     build: ./backend
-    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/visit-home-backend
+    image: ghcr.io/patiphatrattanosot/visit-home-backend
     container_name: backend_service
     volumes:
       - ./backend:/app
@@ -18,7 +18,7 @@ services:
 
   frontend:
     build: ./frontend
-    image: ghcr.io/${GITHUB_REPOSITORY_OWNER}/visit-home-frontend
+    image: ghcr.io/patiphatrattanosot/visit-home-frontend
     container_name: frontend_service
     volumes:
       - ./frontend:/app
