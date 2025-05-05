@@ -4,18 +4,27 @@ on:
   push:
     tags:
       - "*" # Trigger เมื่อ push tag ใด ๆ
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout code
       - uses: actions/checkout@v4.2.2
 
+      # 2. Extract tag name and set TAG_NAME
+      - name: Set TAG_NAME from Git tag
+        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      # 3. Run Docker Compose with TAG_NAME env
       - name: Run docker compose
         uses: hoverkraft-tech/compose-action@v2.0.1
         with:
           compose-file: "./docker-compose.yml"
+        env:
+          TAG_NAME: ${{ env.TAG_NAME }}
 
+      # 4. Execute tests inside running container
       - name: Execute tests in the running services
-        run: |
-          docker compose exec test-app pytest
+        run: docker compose exec test-app pytest
