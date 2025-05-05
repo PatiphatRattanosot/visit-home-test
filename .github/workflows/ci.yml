@@ -4,43 +4,18 @@ on:
   push:
     tags:
       - "*" # Trigger เมื่อ push tag ใด ๆ
-
 jobs:
-  release-docker-image-job:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
 
-      - name: Extract tag name
-        run: echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
-      - name: Verify extracted tag
-        run: echo "Using TAG_NAME=${{ env.TAG_NAME }}"
-
-      - name: Login to GitHub Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-      # Build and push Frontend image
-      - name: Build & Push Frontend Image
-        uses: mr-smithers-excellent/docker-build-push@v6
+      - name: Run docker compose
+        uses: hoverkraft-tech/compose-action@v2.0.1
         with:
-          image: visit-home-frontend
-          registry: ghcr.io/patiphatrattanosot
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: ./frontend/Dockerfile # แก้เป็น Dockerfile ให้ถูกต้อง
-          context: ./frontend
-          tags: ${{ env.TAG_NAME }}, latest
+          compose-file: "../../docker-compose.yml"
 
-      # Build and push Backend image
-      - name: Build & Push Backend Image
-        uses: mr-smithers-excellent/docker-build-push@v6
-        with:
-          image: visit-home-backend
-          registry: ghcr.io/patiphatrattanosot
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: ./backend/Dockerfile # แก้เป็น Dockerfile ให้ถูกต้อง
-          context: ./backend
-          tags: ${{ env.TAG_NAME }}, latest
+      - name: Execute tests in the running services
+        run: |
+          docker compose exec test-app pytest
