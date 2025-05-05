@@ -27,9 +27,11 @@ jobs:
           compose-file: "./docker-compose.yml"
         env:
           TAG_NAME: ${{ env.TAG_NAME }}
+
       - name: Push Docker images to GHCR
         run: |
-          docker push ghcr.io/patiphatrattanosot/visit-home-test:${{ env.TAG_NAME }}
+          docker push ghcr.io/patiphatrattanosot/visit-home-frontend:${{ env.TAG_NAME }}
+          docker push ghcr.io/patiphatrattanosot/visit-home-backend:${{ env.TAG_NAME }}
 
       # # 4. Execute tests inside running container
       # - name: Execute tests in the running services
